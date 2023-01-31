@@ -13,7 +13,7 @@ defined('ABSPATH') or wp_die();
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item"><a href="<?php echo esc_url(admin_url('admin.php?page=timesheetify-pro-panel')); ?>">Dashboard</a></li>
-						<li class="breadcrumb-item"><a href="<?php echo esc_url(admin_url('admin.php?page=timesheetify-pro-members')); ?>">members</a></li>
+						<li class="breadcrumb-item"><a href="<?php echo esc_url(admin_url('admin.php?page=timesheetify-pro-members')); ?>">Members</a></li>
 						<li class="breadcrumb-item active">Add Member</li>
 					</ol>
 				</div>

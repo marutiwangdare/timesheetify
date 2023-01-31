@@ -18,7 +18,7 @@ class swrj_MembersActions
 		$phone          = isset($_POST['phone']) ? sanitize_text_field($_POST['phone']) : '';
 		$email          = isset($_POST['email']) ? sanitize_text_field($_POST['email']) : '';
 		$role           = isset($_POST['role']) ? sanitize_text_field($_POST['role']) : '';
-		$is_active      = isset($_POST['is_active']) ? sanitize_text_field($_POST['is_active']) : 0;
+		$is_active      = isset($_POST['is_active']) ? sanitize_text_field($_POST['is_active']) : '#0';
 		$password       = isset($_POST['password']) ? sanitize_text_field($_POST['password']) : '';
 
 		/* validations */
@@ -103,7 +103,7 @@ class swrj_MembersActions
 		$phone          = isset($_POST['phone']) ? sanitize_text_field($_POST['phone']) : '';
 		$email          = isset($_POST['email']) ? sanitize_text_field($_POST['email']) : '';
 		$role           = isset($_POST['role']) ? sanitize_text_field($_POST['role']) : '';
-		$is_active      = isset($_POST['is_active']) ? sanitize_text_field($_POST['is_active']) : 'inactive';
+		$is_active      = isset($_POST['is_active']) ? sanitize_text_field($_POST['is_active']) : '#0';
 		$password       = isset($_POST['password']) ? sanitize_text_field($_POST['password']) : '';
 		$id             = isset($_POST['id']) ? sanitize_text_field($_POST['id']) : '';
 
@@ -168,9 +168,9 @@ class swrj_MembersActions
 				$query      = swrj_Helper::swrj_update_intoDB($table_name, $data, $where);
 
 				if ($query == true) {
-					wp_send_json_success(array('message' => esc_html__('Member edited successfully', 'projectify')));
+					wp_send_json_success(array('message' => esc_html__('Member edited successfully', 'timesheetify')));
 				} else {
-					wp_send_json_error(array('message' => esc_html__('Member not edited successfully', 'projectify')));
+					wp_send_json_error(array('message' => esc_html__('Member not edited successfully', 'timesheetify')));
 				}
 			} else {
 				wp_send_json_error(array('message' => $message));

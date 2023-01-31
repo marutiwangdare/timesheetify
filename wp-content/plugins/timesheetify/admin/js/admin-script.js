@@ -12,7 +12,7 @@ jQuery(document).ready(function () {
                         jQuery(form)[0].reset();
                     }
                     if (refresh == true) {
-                        location.reload(); 
+                        reload();
                     }
 
                 } else {
@@ -63,11 +63,14 @@ jQuery(document).ready(function () {
     }
 
     /* Save Entities */
-    var saveTeams = new SaveEntries('#AddTeamsForm', true, true);
-    var editTeams = new SaveEntries('#EditTeamsForm', true, true);
+    var AddMembersForm = new SaveEntries('#AddMembersForm', true, true);
+    var EditMembersForm = new SaveEntries('#EditMembersForm', true, true);
 
-    var AddMembersForm = new SaveEntries('#AddMembersForm', true, false);
-    var EditMembersForm = new SaveEntries('#EditMembersForm', false, false);
+    var AddCategoriesForm = new SaveEntries('#AddCategoriesForm', true, true);
+    var EditCategoriesForm = new SaveEntries('#EditCategoriesForm', true, true);
+
+    var AddDepartmentsForm = new SaveEntries('#AddDepartmentsForm', true, true);
+    var EditDepartmentsForm = new SaveEntries('#EditDepartmentsForm', true, true);
 
     /* Delete Entities */
     var deactivateEntities   = new DeactivateEntities( '.deactivate-entities');

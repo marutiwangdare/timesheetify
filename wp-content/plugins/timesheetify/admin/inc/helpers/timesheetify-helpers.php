@@ -93,7 +93,6 @@ class swrj_Helper
 		{
 			$total = $wpdb->get_var("SELECT COUNT(id) FROM $members_table ");
 			$members_data = $wpdb->get_results("SELECT * FROM $members_table ORDER BY ID DESC LIMIT $offset, $items_per_page");
-			$data = array("total" => $total, 'members_list' => $members_data);
 		}
         
 		$data = array("total" => $total, 'members_list' => $members_data, 'search' => $search);
@@ -105,9 +104,72 @@ class swrj_Helper
 	{
 		global $wpdb;
 		$table  = $wpdb->base_prefix . "swrj_members";
-		$data   = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table WHERE user_id = %s", $id));
+		$data   = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table WHERE id = %s", $id));
 		return $data;
 	}
+
+	public static function swrj_get_categories($items_per_page, $page, $search)
+	{
+		global $wpdb;
+		$categories_table = $wpdb->base_prefix . "swrj_categories";
+		$offset = ($page * $items_per_page) - $items_per_page;
+
+		if ($search != '') 
+		{
+			$where = "WHERE  title LIKE '%$search%' or is_active  LIKE '%$search%'";
+			$total = $wpdb->get_var("SELECT COUNT(id) FROM $categories_table $where");
+			$categories_data = $wpdb->get_results("SELECT * FROM $categories_table $where ORDER BY ID DESC LIMIT $offset, $items_per_page");
+			
+		} else 
+		{
+			$total = $wpdb->get_var("SELECT COUNT(id) FROM $categories_table ");
+			$categories_data = $wpdb->get_results("SELECT * FROM $categories_table ORDER BY ID DESC LIMIT $offset, $items_per_page");
+		}
+        
+		$data = array("total" => $total, 'categories_list' => $categories_data, 'search' => $search);
+
+		return $data;
+	}
+
+	public static function swrj_category_info($id)
+	{
+		global $wpdb;
+		$table  = $wpdb->base_prefix . "swrj_categories";
+		$data   = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table WHERE id = %s", $id));
+		return $data;
+	}
+
+	public static function swrj_get_departments($items_per_page, $page, $search)
+	{
+		global $wpdb;
+		$departments_table = $wpdb->base_prefix . "swrj_departments";
+		$offset = ($page * $items_per_page) - $items_per_page;
+
+		if ($search != '') 
+		{
+			$where = "WHERE  title LIKE '%$search%' or is_active  LIKE '%$search%'";
+			$total = $wpdb->get_var("SELECT COUNT(id) FROM $departments_table $where");
+			$departments_data = $wpdb->get_results("SELECT * FROM $departments_table $where ORDER BY ID DESC LIMIT $offset, $items_per_page");
+			
+		} else 
+		{
+			$total = $wpdb->get_var("SELECT COUNT(id) FROM $departments_table ");
+			$departments_data = $wpdb->get_results("SELECT * FROM $departments_table ORDER BY ID DESC LIMIT $offset, $items_per_page");
+		}
+        
+		$data = array("total" => $total, 'departments_list' => $departments_data, 'search' => $search);
+
+		return $data;
+	}
+
+	public static function swrj_department_info($id)
+	{
+		global $wpdb;
+		$table  = $wpdb->base_prefix . "swrj_departments";
+		$data   = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table WHERE id = %s", $id));
+		return $data;
+	}
+
 	public static function swrj_get_pagination($total, $items_per_page, $page)
 	{
 

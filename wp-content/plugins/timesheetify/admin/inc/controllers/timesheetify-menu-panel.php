@@ -34,6 +34,18 @@ class swrj_AdminMenu {
 		) );
 		add_action( 'admin_print_styles-' . $members, array( 'swrj_AdminMenu', 'swrj_dashboard_assets' ) );
 
+		$categories = add_submenu_page( 'timesheetify-pro-panel', esc_html__( 'Categories ', 'timesheetify' ), esc_html__( 'Categories', 'timesheetify' ), 'manage_options', 'timesheetify-pro-categories', array(
+			'swrj_AdminMenu',
+			'swrj_categories'
+		) );
+		add_action( 'admin_print_styles-' . $categories, array( 'swrj_AdminMenu', 'swrj_dashboard_assets' ) );
+
+		$departments = add_submenu_page( 'timesheetify-pro-panel', esc_html__( 'Departments ', 'timesheetify' ), esc_html__( 'Departments', 'timesheetify' ), 'manage_options', 'timesheetify-pro-departments', array(
+			'swrj_AdminMenu',
+			'swrj_departments'
+		) );
+		add_action( 'admin_print_styles-' . $departments, array( 'swrj_AdminMenu', 'swrj_dashboard_assets' ) );
+
     }
 	public static function swrj_team_member_menu() {
     	/*$user_id = get_current_user_id();
@@ -55,6 +67,12 @@ class swrj_AdminMenu {
     }
 	public static function swrj_members() {
 		require_once( 'timesheetify-members-panel.php' );
+    }
+	public static function swrj_categories() {
+		require_once( 'timesheetify-categories-panel.php' );
+    }
+	public static function swrj_departments() {
+		require_once( 'timesheetify-departments-panel.php' );
     }
 
     public static function swrj_dashboard_assets() {

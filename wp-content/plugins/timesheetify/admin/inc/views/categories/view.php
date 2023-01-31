@@ -3,8 +3,8 @@ defined('ABSPATH') or wp_die();
 $page = isset($_GET['cpage']) ? abs((int) $_GET['cpage']) : 1;
 $items_per_page =  get_option('swrj_settings')['items_per_page'];
 $search = isset($_GET['search']) ? trim($_GET['search']): '';
-$data = swrj_Helper::swrj_get_members($items_per_page, $page, $search);
-$members_list = $data['members_list'];
+$data = swrj_Helper::swrj_get_categories($items_per_page, $page, $search);
+$categories_list = $data['categories_list'];
 $total = $data['total'];
 
 ?>
@@ -15,12 +15,12 @@ $total = $data['total'];
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1 class="m-0">Members</h1>
+					<h1 class="m-0">Categories</h1>
 				</div><!-- /.col -->
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item"><a href="<?php echo esc_url(admin_url('admin.php?page=timesheetify-pro-panel')); ?>">Dashboard</a></li>
-						<li class="breadcrumb-item active">Members</li>
+						<li class="breadcrumb-item active">Categories</li>
 					</ol>
 				</div><!-- /.col -->
 			</div><!-- /.row -->
@@ -37,13 +37,13 @@ $total = $data['total'];
 						<div class="card-header">
 							<h3 class="card-title"></h3>
 
-							<a href="<?php echo esc_url(add_query_arg('action', 'add', admin_url('admin.php?page=timesheetify-pro-members'))); ?>">
+							<a href="<?php echo esc_url(add_query_arg('action', 'add', admin_url('admin.php?page=timesheetify-pro-categories'))); ?>">
 								<button type="button" class="btn btn-primary float-left"><i class="fas fa-plus"></i> Add New</button>
 							</a>
 
 							<div class="card-tools">
 								<form role="search" autocomplete="off" action="" method="get">
-									<input type='hidden' name='page' value='timesheetify-pro-members'>
+									<input type='hidden' name='page' value='timesheetify-pro-categories'>
 									<div class="input-group input-group-sm" style="width: 150px;">
 										<input type="text" name="search" class="form-control float-right" placeholder="Search" value="<?php echo $search ?>">
 
@@ -65,29 +65,21 @@ $total = $data['total'];
 								<thead>
 									<tr>
 										<th>S No. #</th>
-										<th>Name</th>
-										<th>User Name</th>
-										<th>Email</th>
-										<th>Phone</th>
-										<th>Role</th>
+										<th>Title</th>
 										<th>Status</th>
 										<th>Action</th>
 									</tr>
 								</thead>
 								<tbody>
 									<?php
-									foreach ($members_list as $mkey => $member) {
+									foreach ($categories_list as $mkey => $category) {
 									?>
 
 										<tr>
-											<td><?php echo esc_attr($member->id); ?></td>
-											<td><?php echo esc_attr($member->name); ?></td>
-											<td><?php echo esc_attr($member->user_name); ?></td>
-											<td><?php echo esc_attr($member->email); ?></td>
-											<td><?php echo esc_attr($member->phone); ?></td>
-											<td><?php echo esc_attr($member->role); ?></td>
+											<td><?php echo esc_attr($category->id); ?></td>
+											<td><?php echo esc_attr($category->title); ?></td>
 											<td>
-												<?php if ($member->is_active=='#1') { ?>
+												<?php if ($category->is_active=='#1') { ?>
 													<div class="badge badge-success">Active</div>
 												<?php } else { ?>
 													<div class="badge badge-danger">Inactive</div>
@@ -104,14 +96,14 @@ $total = $data['total'];
 																							add_query_arg(
 																								array(
 																									'action'  => 'edit',
-																									'user_id' => $member->id,
+																									'category_id' => $category->id,
 																								),
-																								admin_url('admin.php?page=timesheetify-pro-members')
+																								admin_url('admin.php?page=timesheetify-pro-categories')
 																							)
 																						); ?>">
 															<i class="fas fa-pencil-alt"></i>&nbsp Edit
 														</a>
-														<a class="dropdown-item deactivate-entities" data-table="swrj_members" data-id="<?php echo esc_attr( $member->id ); ?>" href="#">
+														<a class="dropdown-item deactivate-entities" data-table="swrj_categories" data-id="<?php echo esc_attr( $category->id ); ?>" href="#">
 															<i class="fas fa-trash" type="submit"></i>&nbsp Deactivate
 														</a>
 													</div>
@@ -125,11 +117,7 @@ $total = $data['total'];
 								<tfoot>
 									<tr>
 										<th>S No. #</th>
-										<th>Name</th>
-										<th>User Name</th>
-										<th>Email</th>
-										<th>Phone</th>
-										<th>Role</th>
+										<th>Title</th>
 										<th>Status</th>
 										<th>Action</th>
 									</tr>
